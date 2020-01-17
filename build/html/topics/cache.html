@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Cache Component &mdash; DPI - Kanban 2019 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Finder Component" href="finder.html" />
+    <link rel="prev" title="The Asset Component" href="asset.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DPI - Kanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Technical Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/install.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/setup.html">Our Micro-App &amp; PhpStorm Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/tutorial.html">Six good reasons to use Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/examples.html">Learn more</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Find different components for Symfony</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="asset.html">The Asset Component</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Cache Component</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cache-contracts">Cache Contracts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#available-cache-adapters">Available Cache Adapters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DPI - Kanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>The Cache Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/topics/cache.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-cache-component">
+<span id="topics-cache"></span><h1>The Cache Component<a class="headerlink" href="#the-cache-component" title="Permalink to this headline">¶</a></h1>
+<p><em>The Cache component provides features covering simple to advanced caching needs. It natively implements PSR-6 and the Cache Contracts for greatest interoperability. It is designed for performance and resiliency, ships with ready to use adapters for the most common caching backends. It enables tag-based invalidation and cache stampede protection via locking and early expiration.</em></p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The component also contains adapters to convert between PSR-6, PSR-16 and Doctrine caches.</p>
+</div>
+<dl class="simple">
+<dt>Type:</dt><dd><p>composer require symfony/cache</p>
+</dd>
+</dl>
+<div class="section" id="cache-contracts">
+<h3>Cache Contracts<a class="headerlink" href="#cache-contracts" title="Permalink to this headline">¶</a></h3>
+<p>This component includes two different approaches to caching:</p>
+<dl class="simple">
+<dt>PSR-6 Caching:</dt><dd><p>A generic cache system, which involves cache “pools” and cache “items”.</p>
+</dd>
+<dt>Cache Contracts:</dt><dd><p>A simpler yet more powerful way to cache values based on recomputation callbacks.</p>
+</dd>
+</dl>
+<p>All adapters support the Cache Contracts. They contain only two methods: get() and delete(). There’s no set() method because the get() method both gets and sets the cache values.</p>
+<p>The first thing you need is to instantiate a cache adapter. The FilesystemAdapter is used in this example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+
+$cache = new FilesystemAdapter();
+</pre></div>
+</div>
+<p>Now you can retrieve and delete cached data using this object. The first argument of the get() method is a key, an arbitrary string that you associate to the cached value so you can retrieve it later. The second argument is a PHP callable which is executed when the key is not found in the cache to generate and return the value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>use Symfony\Contracts\Cache\ItemInterface;
+
+// The callable will only be executed on a cache miss.
+$value = $cache-&gt;get(&#39;my_cache_key&#39;, function (ItemInterface $item) {
+        $item-&gt;expiresAfter(3600);
+
+        // ... do some HTTP request or heavy computations
+        $computedValue = &#39;foobar&#39;;
+
+        return $computedValue;
+});
+
+echo $value; // &#39;foobar&#39;
+
+// ... and to remove the cache key
+$cache-&gt;delete(&#39;my_cache_key&#39;);
+</pre></div>
+</div>
+<p>The Cache Contracts also comes with built in Stampede prevention. This will remove CPU spikes at the moments when the cache is cold. If an example application spends 5 seconds to compute data that is cached for 1 hour and this data is accessed 10 times every second, this means that you mostly have cache hits and everything is fine. But after 1 hour, we get 10 new requests to a cold cache. So the data is computed again. The next second the same thing happens. So the data is computed about 50 times before the cache is warm again. This is where you need stampede prevention</p>
+<p>The first solution is to use locking: only allow one PHP process (on a per-host basis) to compute a specific key at a time. Locking is built-in by default, so you don’t need to do anything beyond leveraging the Cache Contracts.</p>
+<p>The second solution is also built-in when using the Cache Contracts: instead of waiting for the full delay before expiring a value, recompute it ahead of its expiration date. The Probabilistic early expiration algorithm randomly fakes a cache miss for one user while others are still served the cached value. You can control its behavior with the third optional parameter of get(), which is a float value called “beta”.</p>
+<p>By default the beta is 1.0 and higher values mean earlier recompute. Set it to 0 to disable early recompute and set it to INF to force an immediate recompute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>use Symfony\Contracts\Cache\ItemInterface;
+
+$beta = 1.0;
+$value = $cache-&gt;get(&#39;my_cache_key&#39;, function (ItemInterface $item) {
+        $item-&gt;expiresAfter(3600);
+        $item-&gt;tag([&#39;tag_0&#39;, &#39;tag_1&#39;]);
+
+        return &#39;...&#39;;
+}, $beta);
+</pre></div>
+</div>
+</div>
+<div class="section" id="available-cache-adapters">
+<h3>Available Cache Adapters<a class="headerlink" href="#available-cache-adapters" title="Permalink to this headline">¶</a></h3>
+<p>The following cache adapters are available:</p>
+<ul class="simple">
+<li><p>APCu Cache Adapter</p></li>
+<li><p>Array Cache Adapter</p></li>
+<li><p>Chain Cache Adapter</p></li>
+<li><p>Doctrine Cache Adapter</p></li>
+<li><p>Filesystem Cache Adapter</p></li>
+<li><p>Redis Cache Adapter</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="finder.html" class="btn btn-neutral float-right" title="The Finder Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="asset.html" class="btn btn-neutral float-left" title="The Asset Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, kamelija
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

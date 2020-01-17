@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Understanding React components &mdash; DPI - Kanban 2019 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Card adder component" href="adder.html" />
+    <link rel="prev" title="Troubleshooting" href="trouble.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DPI - Kanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Kanban technical documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Setting up the project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kanban.html">Kanban source structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structuring React Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trouble.html">Troubleshooting</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Understanding React components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lifecycle-methods">Lifecycle Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-properties-and-methods">Custom properties and methods</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adder.html">Card adder component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="board.html">Board component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drag.html">Implementing Drag and Drop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finder.html">Node.js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validator.html">Visual Studio Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="new.html">First Hello World application</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DPI - Kanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Understanding React components</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intro/components.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="understanding-react-components">
+<span id="intro-components"></span><h1>Understanding React components<a class="headerlink" href="#understanding-react-components" title="Permalink to this headline">¶</a></h1>
+<p>As we have seen so far, React components are fairly simple. They can have internal state. They can also accept props. Beyond this React provides escape hatches that allow you to handle advanced use cases. These include lifecycle methods and refs. There are also a set of custom properties and methods you may want to be aware of.</p>
+<div class="section" id="lifecycle-methods">
+<h2>Lifecycle Methods<a class="headerlink" href="#lifecycle-methods" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/method.png"><img alt="alternate text" class="align-center" src="../_images/method.png" style="width: 700px; height: 300px;" /></a>
+<p>From the image above we can see that a React component has three phases during its lifecycle. It can be mounting, mounted, and unmounting. Each of these phases comes with related methods.</p>
+<p>During the mounting phase you have access to the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>componentWillMount() gets triggered once before any rendering. One way to use it would be to load data asynchronously there and force rendering through setState. render() will see the updated state and will be executed only once despite the state change. This will get triggered when rendering on a server.</p></li>
+<li><p>componentDidMount() gets triggered after initial rendering. You have access to the DOM here. You could use this hook to wrap a jQuery plugin within a component, for instance. This won’t get triggered when rendering on a server.</p></li>
+</ul>
+</div></blockquote>
+<p>After a component has been mounted and it’s running, you can operate through the following methods:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>componentWillReceiveProps(object nextProps) triggers when the component receives new props. You could, for instance, modify your component state based on the received props.</p></li>
+<li><p>componentWillUpdate(object nextProps, object nextState) gets triggered after shouldComponentUpdate and before render(). It is not possible to use setState here, but you can set class properties, for instance.</p></li>
+<li><p>componentDidUpdate(object nextProps, object nextState) is triggered after rendering. You can modify the DOM here. This can be useful for adapting other code to work with React.</p></li>
+</ul>
+</div></blockquote>
+<p>Finally, when a component is unmounting, there’s one more hook you can use:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>componentWillUnmount() is triggered just before a component is unmounted from the DOM. This is the ideal place to perform cleanup (e.g., remove running timers, custom DOM elements, and so on).</p></li>
+</ul>
+</div></blockquote>
+<p>Often componentDidMount and componentWillUnmount come as a pair. If you set up something DOM related or a listener at componentDidMount, you also have to remember to clean it up at componentWillUnmount.</p>
+</div>
+<div class="section" id="custom-properties-and-methods">
+<h2>Custom properties and methods<a class="headerlink" href="#custom-properties-and-methods" title="Permalink to this headline">¶</a></h2>
+<p>Beyond the lifecycle methods and refs, there are a variety of properties and methods you should be aware of especially if you are going to use React.createClass:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>displayName - It is preferable to set displayName as that will improve debug information. For ES6 classes this is derived automatically based on the class name. You can attach displayName to an anonymous function based component as well.</p></li>
+<li><p>getInitialState() - In class based approach the same can be achieved through constructor.</p></li>
+<li><p>getDefaultProps() - In classes you can set these in constructor.</p></li>
+<li><p>render() - This is the workhorse of React. It must return a single node as returning multiple won’t work!</p></li>
+<li><p>statics - statics contains static properties and method for a component. In ES6 you can assign them to the class as below</p></li>
+</ul>
+</div></blockquote>
+<p>Exampple:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Note</span> <span class="p">{</span>
+<span class="n">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="o">...</span>
+<span class="p">}</span>
+<span class="p">}</span>
+<span class="n">Note</span><span class="o">.</span><span class="n">willTransitionTo</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="o">...</span><span class="p">};</span>
+
+<span class="n">export</span> <span class="n">default</span> <span class="n">Note</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This could also be written as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Note</span> <span class="p">{</span>
+<span class="n">static</span> <span class="n">willTransitionTo</span><span class="p">()</span> <span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="n">render</span><span class="p">()</span> <span class="p">{</span>
+        <span class="o">...</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">export</span> <span class="n">default</span> <span class="n">Note</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="adder.html" class="btn btn-neutral float-right" title="Card adder component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="trouble.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, kamelija
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

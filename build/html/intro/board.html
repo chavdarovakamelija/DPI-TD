@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Board component &mdash; DPI - Kanban 2019 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DPI - Kanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Kanban technical documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finder.html">Node.js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validator.html">Visual Studio Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DPI - Kanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Board component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intro/board.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="board-component">
+<span id="intro-board"></span><h1>Board component<a class="headerlink" href="#board-component" title="Permalink to this headline">¶</a></h1>
+<p>To follow the principle of “lifting up state” we will keep the state of our Kanban board in the closest common ancestor (in this case &lt;Board /&gt;) of all the child components that need access to the state. Any component can be stateful and keep track of its own local component state, but you can imagine how that could quickly get complicated. The preferred way of doing things is to use stateful components when necessary and leave components stateless when you can as they are easier to reason about. In keeping state in our &lt;Board /&gt;component we are keeping a single source of truth in the closest common ancestor component.  Take a look at how we start setting up &lt;Board /&gt;</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  import React, { Component } from &quot;react&quot;;
+  import PropTypes from &quot;prop-types&quot;;
+  import { connect } from &quot;react-redux&quot;;
+  import { Title } from &quot;react-head&quot;;
+  import { DragDropContext, Droppable } from &quot;react-beautiful-dnd&quot;;
+  import classnames from &quot;classnames&quot;;
+  import List from &quot;../List/List&quot;;
+  import ListAdder from &quot;../ListAdder/ListAdder&quot;;
+  import Header from &quot;../Header/Header&quot;;
+  import BoardHeader from &quot;../BoardHeader/BoardHeader&quot;;
+  import &quot;./Board.scss&quot;;
+
+  class Board extends Component {
+  static propTypes = {
+          lists: PropTypes.arrayOf(
+          PropTypes.shape({ _id: PropTypes.string.isRequired })
+          ).isRequired,
+          boardId: PropTypes.string.isRequired,
+          boardTitle: PropTypes.string.isRequired,
+          boardColor: PropTypes.string.isRequired,
+          dispatch: PropTypes.func.isRequired
+  };
+
+  constructor(props) {
+          super(props);
+          this.state = {
+          startX: null,
+          startScrollX: null
+          };
+  }
+
+  // boardId is stored in the redux store so that it is available inside middleware
+  componentDidMount = () =&gt; {
+          const { boardId, dispatch } = this.props;
+          dispatch({
+          type: &quot;PUT_BOARD_ID_IN_REDUX&quot;,
+          payload: { boardId }
+          });
+  };
+
+  handleDragEnd = ({ source, destination, type }) =&gt; {
+          // dropped outside the list
+          if (!destination) {
+          return;
+          }
+          const { dispatch, boardId } = this.props;
+
+          // Move list
+          if (type === &quot;COLUMN&quot;) {
+          // Prevent update if nothing has changed
+          if (source.index !== destination.index) {
+                  dispatch({
+                  type: &quot;MOVE_LIST&quot;,
+                  payload: {
+                          oldListIndex: source.index,
+                          newListIndex: destination.index,
+                          boardId: source.droppableId
+                  }
+                  });
+          }
+          return;
+          }
+          // Move card
+          if (
+          source.index !== destination.index ||
+          source.droppableId !== destination.droppableId
+          ) {
+          dispatch({
+                  type: &quot;MOVE_CARD&quot;,
+                  payload: {
+                  sourceListId: source.droppableId,
+                  destListId: destination.droppableId,
+                  oldCardIndex: source.index,
+                  newCardIndex: destination.index,
+                  boardId
+                  }
+          });
+          }
+  };
+
+          // The following three methods implement dragging of the board by holding down the mouse
+  handleMouseDown = ({ target, clientX }) =&gt; {
+          if (target.className !== &quot;list-wrapper&quot; &amp;&amp; target.className !== &quot;lists&quot;) {
+          return;
+          }
+          window.addEventListener(&quot;mousemove&quot;, this.handleMouseMove);
+          window.addEventListener(&quot;mouseup&quot;, this.handleMouseUp);
+          this.setState({
+          startX: clientX,
+startScrollX: window.scrollX
+          });
+  };
+
+  // Go to new scroll position every time the mouse moves while dragging is activated
+  handleMouseMove = ({ clientX }) =&gt; {
+          const { startX, startScrollX } = this.state;
+          const scrollX = startScrollX - clientX + startX;
+          window.scrollTo(scrollX, 0);
+                  const windowScrollX = window.scrollX;
+                  if (scrollX !== windowScrollX) {
+                          this.setState({
+                          startX: clientX + windowScrollX - startScrollX
+                  });
+                  }
+          };
+
+  // Remove drag event listeners
+  handleMouseUp = () =&gt; {
+          if (this.state.startX) {
+          window.removeEventListener(&quot;mousemove&quot;, this.handleMouseMove);
+          window.removeEventListener(&quot;mouseup&quot;, this.handleMouseUp);
+          this.setState({ startX: null, startScrollX: null });
+          }
+  };
+
+  handleWheel = ({ target, deltaY }) =&gt; {
+          // Scroll page right or left as long as the mouse is not hovering a card-list (which could              have vertical scroll)
+          if (
+          target.className !== &quot;list-wrapper&quot; &amp;&amp;
+          target.className !== &quot;lists&quot; &amp;&amp;
+          target.className !== &quot;open-composer-button&quot; &amp;&amp;
+          target.className !== &quot;list-title-button&quot;
+          ) {
+          return;
+          }
+          // Move the board 80 pixes on every wheel event
+          if (Math.sign(deltaY) === 1) {
+          window.scrollTo(window.scrollX + 80, 0);
+          } else if (Math.sign(deltaY) === -1) {
+          window.scrollTo(window.scrollX - 80, 0);
+          }
+  };
+</pre></div>
+</div>
+<p>Now you actually have to render something. Looking at our state we have lists array with 4 objects in it, each one representing a list that you’ll see rendering out to the DOM. Here’s the common pattern:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">render</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="n">const</span> <span class="p">{</span> <span class="n">lists</span><span class="p">,</span> <span class="n">boardTitle</span><span class="p">,</span> <span class="n">boardId</span><span class="p">,</span> <span class="n">boardColor</span> <span class="p">}</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">props</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;&gt;</span>
+                <span class="o">&lt;</span><span class="n">div</span> <span class="n">className</span><span class="o">=</span><span class="p">{</span><span class="n">classnames</span><span class="p">(</span><span class="s2">&quot;board&quot;</span><span class="p">,</span> <span class="n">boardColor</span><span class="p">)}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">Title</span><span class="o">&gt;</span><span class="p">{</span><span class="n">boardTitle</span><span class="p">}</span> <span class="o">|</span> <span class="n">React</span> <span class="n">Kanban</span><span class="o">&lt;/</span><span class="n">Title</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">Header</span> <span class="o">/&gt;</span>
+                <span class="o">&lt;</span><span class="n">BoardHeader</span> <span class="o">/&gt;</span>
+                        <span class="p">{</span><span class="o">/*</span> <span class="n">eslint</span><span class="o">-</span><span class="n">disable</span> <span class="n">jsx</span><span class="o">-</span><span class="n">a11y</span><span class="o">/</span><span class="n">no</span><span class="o">-</span><span class="n">static</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">interactions</span> <span class="o">*/</span><span class="p">}</span>
+                <span class="o">&lt;</span><span class="n">div</span>
+                        <span class="n">className</span><span class="o">=</span><span class="s2">&quot;lists-wrapper&quot;</span>
+                        <span class="n">onMouseDown</span><span class="o">=</span><span class="p">{</span><span class="n">this</span><span class="o">.</span><span class="n">handleMouseDown</span><span class="p">}</span>
+                        <span class="n">onWheel</span><span class="o">=</span><span class="p">{</span><span class="n">this</span><span class="o">.</span><span class="n">handleWheel</span><span class="p">}</span>
+                <span class="o">&gt;</span>
+                        <span class="p">{</span><span class="o">/*</span> <span class="n">eslint</span><span class="o">-</span><span class="n">enable</span> <span class="n">jsx</span><span class="o">-</span><span class="n">a11y</span><span class="o">/</span><span class="n">no</span><span class="o">-</span><span class="n">static</span><span class="o">-</span><span class="n">element</span><span class="o">-</span><span class="n">interactions</span> <span class="o">*/</span><span class="p">}</span>
+                        <span class="o">&lt;</span><span class="n">DragDropContext</span> <span class="n">onDragEnd</span><span class="o">=</span><span class="p">{</span><span class="n">this</span><span class="o">.</span><span class="n">handleDragEnd</span><span class="p">}</span><span class="o">&gt;</span>
+                        <span class="o">&lt;</span><span class="n">Droppable</span>
+                                <span class="n">droppableId</span><span class="o">=</span><span class="p">{</span><span class="n">boardId</span><span class="p">}</span>
+                                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;COLUMN&quot;</span>
+                                <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span>
+                        <span class="o">&gt;</span>
+                                <span class="p">{</span><span class="n">provided</span> <span class="o">=&gt;</span> <span class="p">(</span>
+                                <span class="o">&lt;</span><span class="n">div</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;lists&quot;</span> <span class="n">ref</span><span class="o">=</span><span class="p">{</span><span class="n">provided</span><span class="o">.</span><span class="n">innerRef</span><span class="p">}</span><span class="o">&gt;</span>
+                                        <span class="p">{</span><span class="n">lists</span><span class="o">.</span><span class="n">map</span><span class="p">((</span><span class="nb">list</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+                                        <span class="o">&lt;</span><span class="n">List</span>
+                                                <span class="nb">list</span><span class="o">=</span><span class="p">{</span><span class="nb">list</span><span class="p">}</span>
+                                                <span class="n">boardId</span><span class="o">=</span><span class="p">{</span><span class="n">boardId</span><span class="p">}</span>
+                                                <span class="n">index</span><span class="o">=</span><span class="p">{</span><span class="n">index</span><span class="p">}</span>
+                                                <span class="n">key</span><span class="o">=</span><span class="p">{</span><span class="nb">list</span><span class="o">.</span><span class="n">_id</span><span class="p">}</span>
+                                        <span class="o">/&gt;</span>
+                                        <span class="p">))}</span>
+                                        <span class="p">{</span><span class="n">provided</span><span class="o">.</span><span class="n">placeholder</span><span class="p">}</span>
+                                        <span class="o">&lt;</span><span class="n">ListAdder</span> <span class="n">boardId</span><span class="o">=</span><span class="p">{</span><span class="n">boardId</span><span class="p">}</span> <span class="o">/&gt;</span>
+                                <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+                                <span class="p">)}</span>
+                        <span class="o">&lt;/</span><span class="n">Droppable</span><span class="o">&gt;</span>
+                        <span class="o">&lt;/</span><span class="n">DragDropContext</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">div</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;board-underlay&quot;</span> <span class="o">/&gt;</span>
+                <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;/&gt;</span>
+        <span class="p">);</span>
+<span class="p">};</span>
+<span class="p">}</span>
+
+<span class="n">const</span> <span class="n">mapStateToProps</span> <span class="o">=</span> <span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">ownProps</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="n">const</span> <span class="p">{</span> <span class="n">board</span> <span class="p">}</span> <span class="o">=</span> <span class="n">ownProps</span><span class="p">;</span>
+<span class="k">return</span> <span class="p">{</span>
+        <span class="n">lists</span><span class="p">:</span> <span class="n">board</span><span class="o">.</span><span class="n">lists</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">listId</span> <span class="o">=&gt;</span> <span class="n">state</span><span class="o">.</span><span class="n">listsById</span><span class="p">[</span><span class="n">listId</span><span class="p">]),</span>
+        <span class="n">boardTitle</span><span class="p">:</span> <span class="n">board</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+        <span class="n">boardColor</span><span class="p">:</span> <span class="n">board</span><span class="o">.</span><span class="n">color</span><span class="p">,</span>
+        <span class="n">boardId</span><span class="p">:</span> <span class="n">board</span><span class="o">.</span><span class="n">_id</span>
+<span class="p">};</span>
+<span class="p">};</span>
+
+<span class="n">export</span> <span class="n">default</span> <span class="n">connect</span><span class="p">(</span><span class="n">mapStateToProps</span><span class="p">)(</span><span class="n">Board</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The render() method is required in all class components (stateful component s), it reads this.props and this.state and returns something. It’s pure in that it doesn’t modify component state or interact directly with the DOM, that’s supposed to be done in lifecycle methods like componentDidMount().</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, kamelija
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

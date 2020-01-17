@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Node.js &mdash; DPI - Kanban 2019 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Cache Component" href="cache.html" />
+    <link rel="prev" title="Learn more" href="../intro/examples.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DPI - Kanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">First steps</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Technical Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/install.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/setup.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/tutorial.html">Six good reasons to use Symfony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/examples.html">Learn more</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Find different components for Symfony</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Node.js</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#asset-packeges">Asset Packeges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grouped-assets">Grouped Assets</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">The Cache Component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finder.html">The Finder Component</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validator.html">The Validator Component</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DPI - Kanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Node.js</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/topics/asset.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="node-js">
+<span id="topics-asset"></span><h1>Node.js<a class="headerlink" href="#node-js" title="Permalink to this headline">¶</a></h1>
+<p><em>The Asset component manages URL generation and versioning of web assets such as CSS stylesheets, JavaScript files and image files.</em></p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you install this component outside of a Symfony application, you must require the vendor/autoload.php file in your code to enable the class autoloading mechanism provided by Composer.</p>
+</div>
+<p>Type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">composer</span> <span class="n">require</span> <span class="n">symfony</span><span class="o">/</span><span class="n">asset</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="asset-packeges">
+<h3>Asset Packeges<a class="headerlink" href="#asset-packeges" title="Permalink to this headline">¶</a></h3>
+<p>The Asset component manages assets through packages. A package groups all the assets which share the same properties: versioning strategy, base path, CDN hosts, etc. In the following basic example, a package is created to manage assets without any versioning:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+
+$package = new Package(new EmptyVersionStrategy());
+
+// Absolute path
+echo $package-&gt;getUrl(&#39;/image.png&#39;);
+// result: /image.png
+
+// Relative path
+echo $package-&gt;getUrl(&#39;image.png&#39;);
+// result: image.png
+</pre></div>
+</div>
+<p>Packages implement PackageInterface, which defines the following two methods:</p>
+<dl class="simple">
+<dt><a class="reference external" href="https://github.com/symfony/symfony/blob/4.3/src/Symfony/Component/Asset/PackageInterface.php">getVersion()</a></dt><dd><p>Returns the asset version for an asset.</p>
+</dd>
+<dt><a class="reference external" href="https://github.com/symfony/symfony/blob/4.3/src/Symfony/Component/Asset/PackageInterface.php">getUrl()</a></dt><dd><p>Returns an absolute or root-relative public path.</p>
+</dd>
+</dl>
+<p>With a package, you can:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><a class="reference external" href="https://symfony.com/doc/current/components/asset.html#component-assets-versioning">version the assets</a>;</p></li>
+<li><p>set a <a class="reference external" href="https://symfony.com/doc/current/components/asset.html#component-assets-path-package">common base path</a> (e.g. /css) for the assets;</p></li>
+<li><p><a class="reference external" href="https://symfony.com/doc/current/components/asset.html#component-assets-cdn">configure a CDN</a> for the assets</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="grouped-assets">
+<h3>Grouped Assets<a class="headerlink" href="#grouped-assets" title="Permalink to this headline">¶</a></h3>
+<p>Often, many assets live under a common path (e.g. /static/images). If that’s your case, replace the default Package class with PathPackage to avoid repeating that path over and over again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>use Symfony\Component\Asset\PathPackage;
+// ...
+
+$pathPackage = new PathPackage(&#39;/static/images&#39;, new StaticVersionStrategy(&#39;v1&#39;));
+
+echo $pathPackage-&gt;getUrl(&#39;logo.png&#39;);
+// result: /static/images/logo.png?v1
+
+// Base path is ignored when using absolute paths
+echo $pathPackage-&gt;getUrl(&#39;/logo.png&#39;);
+// result: /logo.png?v1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cache.html" class="btn btn-neutral float-right" title="The Cache Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../intro/examples.html" class="btn btn-neutral float-left" title="Learn more" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, kamelija
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>First Hello World application &mdash; DPI - Kanban 2019 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> DPI - Kanban
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Kanban technical documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="finder.html">Node.js</a></li>
+<li class="toctree-l1"><a class="reference internal" href="validator.html">Visual Studio Code</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DPI - Kanban</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>First Hello World application</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intro/new.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="first-hello-world-application">
+<span id="intro-new"></span><h1>First Hello World application<a class="headerlink" href="#first-hello-world-application" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="install-create-react-app">
+<h2>Install create react app<a class="headerlink" href="#install-create-react-app" title="Permalink to this headline">¶</a></h2>
+<p>Setting up productive react development environment would need to configure tools like babel, webpack which are complex to configure for a newbie in react world. There are several tools that help to alleviate this problem out of which create react app is the easiest and finest tool with production grade configurations pre-built. The goodness of this tool is, it does not lock in and allows you to alter the configuration by ejecting the create react app.</p>
+<p>We will install create-react-app using npm. On terminal run the install command shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span> <span class="o">-</span><span class="n">g</span> <span class="n">create</span><span class="o">-</span><span class="n">react</span><span class="o">-</span><span class="n">app</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/prim.jpg"><img alt="alternate text" class="align-center" src="../_images/prim.jpg" style="width: 500px; height: 200px;" /></a>
+<p>On successful installation you should see the output like above (note your create-react-app version may be different by the time you run this install command)</p>
+</div>
+<div class="section" id="test-create-react-app">
+<h2>Test create-react-app<a class="headerlink" href="#test-create-react-app" title="Permalink to this headline">¶</a></h2>
+<p>To test the create-react-app, run below command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span><span class="o">-</span><span class="n">react</span><span class="o">-</span><span class="n">app</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>Congratulations, you have successfully installed create-react-app</p>
+</div>
+<div class="section" id="running-the-first-hello-world-application">
+<h2>Running the first Hello World application<a class="headerlink" href="#running-the-first-hello-world-application" title="Permalink to this headline">¶</a></h2>
+<p>Create react application using create-react-app command line using below command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span><span class="o">-</span><span class="n">react</span><span class="o">-</span><span class="n">app</span> <span class="n">hello</span><span class="o">-</span><span class="n">react</span>
+</pre></div>
+</div>
+<p>This command creates a new folder named hello-react and creates all the files and setups the necessary libraries within this folder and makes the react project ready to be executed without any additional configuration</p>
+<p>Once project is created change into project directory and run application using npm start command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>npm start command starts webpack development server which in turn performs all the build process and opens a browser window and loads application url which runs at <a class="reference external" href="http://localhost:3000">http://localhost:3000</a> by default.</p>
+<p>You will see a beautiful window like below one which show you the react icon and some text.</p>
+<a class="reference internal image-reference" href="../_images/start.jpg"><img alt="alternate text" class="align-center" src="../_images/start.jpg" style="width: 700px; height: 200px;" /></a>
+<p>As discussed, create react app comes with great tooling, one of the productive features is webpack hot reloading, which deploys the change on live and saves developer lot of time to redeploy and reload work.</p>
+<p>Let’s open the project and make some changes to see the experience of this great feature. We will go through the project structure to understand the importance of the file create by create react app.</p>
+<p>You have several folders and files which were created by create-react-app. Let’s walkthrough them</p>
+<p><strong>node_modules:</strong> This folder is managed by package manager (npm) and contains all the project library dependencies. Files in this folder should not be modified as the changes made are not guaranteed to be safe as updating/installing any other library can overwrite the changes made.</p>
+<p><strong>public:</strong> This folder contains the assets that should be served publicly without any restrictions and contains files like index.html, favicon, manifest.json</p>
+<p><strong>src:</strong> This is the folder that contains all your development effort. As a react developer you spent lot of time in this folder creating components and other sources of code.</p>
+<p>Now let’s get into the files inside this folder. To start with index.js is the starting file of this project where the execution on your code starts, this file injects App component which is exported from App.js. All the output you see in the browser is resultant on this file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">React</span><span class="o">,</span> <span class="p">{</span><span class="n">Component</span> <span class="p">}</span> <span class="kn">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">logo</span> <span class="kn">from</span> <span class="s1">&#39;./logo.svg&#39;</span><span class="p">;</span>
+<span class="kn">import</span> <span class="s1">&#39;./App.css&#39;</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">App</span> <span class="n">extends</span> <span class="n">Component</span> <span class="p">{</span>
+<span class="n">render</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+     <span class="o">&lt;</span><span class="n">div</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;App&quot;</span><span class="o">&gt;</span>
+           <span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span> <span class="n">Hello</span> <span class="n">React</span> <span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+         <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="p">);</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">export</span> <span class="n">default</span> <span class="n">App</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Save the file and switch back to browser to see the changes deployed and loaded as discussed, this one of the features of create-react-app to tooling setup.
+With new changes your browser window should look like below</p>
+<a class="reference internal image-reference" href="../_images/hello.jpg"><img alt="alternate text" class="align-center" src="../_images/hello.jpg" style="width: 700px; height: 200px;" /></a>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, kamelija
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
